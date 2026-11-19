@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cosas que me gustan de ti</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Nunito:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#fff5f6; --card:#ffffff; --text:#3a2a30; --muted:#9a7f87; --accent:#e0476b; --accent-soft:#fde3e9; --line:#f3d3da;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1d1418; --card:#2a1d23; --text:#f6e7ea; --muted:#b69aa2; --accent:#ff7d9a; --accent-soft:#3b2530; --line:#443039;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.55;min-height:100vh}
+main{max-width:640px;margin:0 auto;padding:48px 20px 80px}
+header{text-align:center;margin-bottom:36px}
+.heart{font-size:2.4rem;display:inline-block;animation:beat 1.8s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+h1{font-family:'Playfair Display',Georgia,'Times New Roman',serif;font-size:clamp(2rem,7vw,2.8rem);margin:8px 0 6px;color:var(--accent);font-style:italic;font-weight:500}
+.sub{color:var(--muted);margin:0}
+.count{display:inline-block;margin-top:14px;padding:4px 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:.9rem}
+#list{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:n}
+#list li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px 16px 64px;animation:in .5s ease both}
+#list li::before{counter-increment:n;content:counter(n);position:absolute;left:16px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-family:'Playfair Display',Georgia,serif}
+#list li .t{font-size:1.05rem;overflow-wrap:anywhere}
+#list li .d{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+#list li.photo{padding:10px}
+#list li.photo img{width:100%;display:block;border-radius:10px;max-height:560px;object-fit:cover}
+#list li.photo .cap{display:block;text-align:center;color:var(--muted);font-size:.9rem;margin-top:8px}
+.hero{display:flex;justify-content:center;margin:26px 0 4px}
+.polaroid{background:#fff;padding:10px 10px 38px;border-radius:4px;box-shadow:0 10px 28px rgba(0,0,0,.22);transform:rotate(-2.5deg);width:min(260px,70vw)}
+.polaroid img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+footer{text-align:center;margin-top:40px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="heart">💗</div>
+    <h1>Cosas que me gustan de ti</h1>
+    <p class="sub">Una lista que nunca termina</p>
+    <span class="count" id="count"></span>
+    <div class="hero"><div class="polaroid"><img src="nerea4.jpg" alt="Nosotros en el ascensor"></div></div>
+  </header>
+
+  <ol id="list"></ol>
+
+  <footer>Y seguiré añadiendo más 💕</footer>
+</main>
+
+<script>
+/* ============================================================
+   AQUÍ ESTÁ TU LISTA. Para añadir un punto nuevo, copia una
+   línea, pégala debajo de la última (antes del corchete ]) y
+   cambia el texto. Cada línea acaba con una coma.
+   Para meter una foto entre puntos: { photo: "archivo.jpg" },
+   (la foto tiene que estar subida al repositorio).
+   La fecha es opcional: "2026-11-18" (año-mes-día).
+   ============================================================ */
+var items = [
+  { text: "Muy guapa" },
+  { text: "Muy sexy" },
+  { text: "Muy mona" },
+  { text: "Haces un esfuerzo por pensar las cosas" },
+  { text: "Eres capaz de hacer que me recupere cuando estoy acabado" },
+  { text: "Escuchas mucho" },
+  { text: "Te gusta hablar conmigo incluso cuando yo no quiero hablar con nadie" },
+  { text: "Das buenos consejos" },
+  { photo: "nerea3.jpg", alt: "Tú en el sofá" },
+  { text: "Te preocupas mucho por mí" },
+  { text: "Intentas no juzgar mis randomadas" },
+  { text: "Te gusta mucho comer" },
+  { text: "Te gusta mucho quedar conmigo siempre que puedes" },
+  { text: "Intentas sacar lo mejor de mí para que no sea un ladrillo" },
+  { text: "Se te ocurren ideas de planes interesantes" },
+  { text: "Eres capaz de hacer que me mueva y no me quede en casa todo el día" },
+  { text: "Me haces reír mucho" },
+  { text: "Haces muchos cumplidos" },
+  { text: "No eres violenta" },
+  { text: "Eres calmada" },
+  { photo: "nerea2.jpg", alt: "Una chinchilla" },
+  { text: "Te pones muy feliz cuando te hago detalles" },
+  { text: "Eres buena persona aunque un poco clasista" },
+  { text: "Tienes un buen estilo y te vistes bien" },
+  { text: "Eres orgullosa de buena manera" },
+  { text: "Tienes cuidado de no fumar delante mío" },
+  { text: "Tienes cuidado de no intentar gastar demasiado" },
+  { text: "Me dejas ser autista con mis gustos" },
+  { text: "Pones esfuerzo en llevarte bien con mi familia y amigos" },
+  { text: "Tienes buenas tetas y buen culo" },
+  { text: "Eres muy trabajadora" },
+  { text: "Eres resiliente, no te quejas mucho como yo" },
+  { photo: "nerea1.jpg", alt: "Tú de perfil" },
+  { text: "Te intentas interesar por mis cosas por raras que sean" },
+  { text: "Hueles muy bien" },
+  { text: "Me gustan tus botas" },
+  { text: "Me encantan tus ojos y tus caras" },
+  { text: "Me gusta cuando babeas la almohada" },
+  { text: "Me gusta tu dedicación al rincón" },
+  { text: "Eres muy agradecida" },
+  { text: "Me gusta que me quieras mucho y por ende yo también" },
+];
+
+/* ---------- No hace falta tocar nada de aquí para abajo ---------- */
+var list = document.getElementById('list');
+var count = document.getElementById('count');
+var n = items.filter(function(x){ return !x.photo; }).length;
+count.textContent = n === 1 ? '1 cosa y contando' : n + ' cosas y contando';
+
+items.forEach(function(it, i){
+  var li = document.createElement('li');
+  li.style.animationDelay = Math.min(i * 60, 600) + 'ms';
+  if (it.photo){
+    li.className = 'photo';
+    var img = document.createElement('img');
+    img.src = it.photo; img.alt = it.alt || ''; img.loading = 'lazy';
+    li.appendChild(img);
+    if (it.caption){
+      var c = document.createElement('span'); c.className = 'cap'; c.textContent = it.caption;
+      li.appendChild(c);
+    }
+    list.appendChild(li);
+    return;
+  }
+  var t = document.createElement('span');
+  t.className = 't';
+  t.textContent = it.text;
+  li.appendChild(t);
+  if (it.date){
+    var d = document.createElement('span');
+    d.className = 'd';
+    d.textContent = new Date(it.date + 'T12:00:00').toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+    li.appendChild(d);
+  }
+  list.appendChild(li);
+});
+</script>
+</body>
+</html>
